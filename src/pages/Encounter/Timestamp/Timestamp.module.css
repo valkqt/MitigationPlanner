@@ -1,0 +1,20 @@
+.timestamp {
+  display: flex;
+  text-align: center;
+  width: fit-content;
+}
+
+.minutes {
+  text-align: right;
+  width: 15px;
+}
+
+.dots {
+  width: 6px;
+  text-align: center;
+}
+
+.seconds {
+  text-align: left;
+  width: 15px;
+}

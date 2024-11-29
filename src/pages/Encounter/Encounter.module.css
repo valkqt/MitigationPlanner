@@ -1,0 +1,46 @@
+.TimelineContainer {
+  background-color: rgb(20, 19, 26);
+  color: white;
+  overflow: auto;
+}
+
+.jobIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.timeNumber {
+  display: flex;
+  margin-left: -18px;
+  gap: 44px;
+}
+
+.timeDisplay {
+  background-color: black;
+  min-height: 24px;
+  padding-left: 72px;
+  flex-wrap: wrap;
+}
+
+.tickContainer {
+  display: flex;
+  width: min-content;
+}
+
+.tick {
+  box-sizing: border-box;
+  border-left: 1px solid gray;
+  width: 8px;
+}
+
+.tenSeconds {
+  height: 18px;
+}
+
+.fiveSeconds {
+  height: 12px;
+}
+
+.oneSecond {
+  height: 8px;
+}
