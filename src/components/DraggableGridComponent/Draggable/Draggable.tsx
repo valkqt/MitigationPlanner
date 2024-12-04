@@ -24,6 +24,8 @@ interface Props {
   translate?: Translate;
   ability: Ability;
   onRightClick: any;
+  setMouse: any;
+  mouse: number;
 }
 
 export const Draggable = forwardRef<HTMLButtonElement, Props>(
@@ -38,8 +40,10 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
       translate,
       ability,
       onRightClick,
+      setMouse,
+      mouse,
       ...props
-    },
+    }: Props,
     ref
   ) {
     return (
@@ -56,6 +60,18 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
             "--translate-y": `${translate?.y ?? 0}px`,
           } as React.CSSProperties
         }
+        onMouseMove={(e) => {
+          const currentMousePosition =
+            e.pageX - 72 - (translate ? translate.x : 0);
+          const gridMousePosition = () => {
+            if (currentMousePosition % 8 === 0) {
+              return currentMousePosition;
+            } else {
+              return mouse;
+            }
+          };
+          setMouse(gridMousePosition());
+        }}
       >
         <button
           ref={ref}

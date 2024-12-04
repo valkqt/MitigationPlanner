@@ -12,6 +12,8 @@ interface DraggableItemProps {
   axis?: Axis;
   ability: Ability;
   onRightClick: any;
+  setMouse: any;
+  mouse: number;
 }
 
 export default function DraggableItem({
@@ -22,6 +24,8 @@ export default function DraggableItem({
   handle,
   ability,
   onRightClick,
+  setMouse,
+  mouse,
 }: DraggableItemProps) {
   const { attributes, isDragging, listeners, setNodeRef } = useDraggable({
     id: "draggable",
@@ -40,6 +44,8 @@ export default function DraggableItem({
       {...attributes}
       ability={ability}
       onRightClick={onRightClick}
+      setMouse={setMouse}
+      mouse={mouse}
     />
   );
 }
