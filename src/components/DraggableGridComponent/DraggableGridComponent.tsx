@@ -22,6 +22,23 @@ const defaultCoordinates = {
   y: 0,
 };
 
+let absoluteMousePosition: number;
+document.addEventListener("mousemove", (e) => {
+  absoluteMousePosition = e.pageX - 64;
+
+  let mrow;
+  if (absoluteMousePosition % 8 === 0) {
+    return absoluteMousePosition;
+  } else {
+    let position = absoluteMousePosition;
+    while (!(position % 8 === 0)) {
+      position -= 1;
+    }
+    mrow = position;
+  }
+  absoluteMousePosition = mrow;
+});
+
 interface DndContextProps {
   activationConstraint?: PointerActivationConstraint;
   axis?: Axis;
@@ -73,61 +90,59 @@ export const DraggableGridComponent = forwardRef<number, DndContextProps>(
     const mouseOverRef = ref as MutableRefObject<number>;
 
     function resolveCollision(translationResult: number): Segment | undefined {
-      // if (translationResult < 0) {
-      //   return;
-      // }
-
       const dragSegmentStart = translationResult / 8;
       const dragSegmentEnd = dragSegmentStart + entity.length;
 
-      return segments.find(
+      const pepe = segments.find(
         (seg) =>
           seg.start < dragSegmentEnd &&
           dragSegmentStart < seg.start + seg.length &&
           seg.segmentId !== entity.segmentId
       );
+
+      return pepe;
     }
 
-    function moveDraggableToEdge(segment: Segment): number {
-      let newPosition;
-      const mousePepe = mouseOverRef.current * 8;
+    function moveDraggableToEdge(segment: Segment): void {
+      let collisionResult;
       const segmentEnd = segment.start + segment.length;
-      const pepe = fixedMousePosition;
-      console.log(pepe, segment);
 
-      if (mousePepe >= segmentEnd * 8) {
-        newPosition = segmentEnd * 8;
-        const newSegment = resolveCollision(newPosition);
+      if (absoluteMousePosition >= segmentEnd * 8) {
+        console.log("mouse > end");
+        collisionResult = segmentEnd * 8;
+        const newSegment = resolveCollision(collisionResult);
 
-        if (!newSegment) {
-          console.log("case 1");
-          const newPosition2 = newPosition - pepe;
-          const newSegment2 = resolveCollision(newPosition2);
-          if (newSegment2) {
-            return (newSegment2.start + newSegment2.length) * 8;
-          } else {
-            return translate.x;
-          }
+        if (newSegment) {
+          setTranslate({
+            initialTranslate,
+            translate,
+          });
+        } else {
+          setTranslate({
+            initialTranslate,
+            translate: { ...translate, x: collisionResult },
+          });
         }
-      } else {
-        newPosition = (segment.start - segment.length) * 8;
-
-        const newSegment = resolveCollision(newPosition);
-
-        if (!(newSegment || newPosition <= 0)) {
-          console.log("case 2");
-
-          const newPosition2 = newPosition + pepe;
-          const newSegment2 = resolveCollision(newPosition2);
-          if (newSegment2) {
-            return (newSegment2.start - newSegment2.length) * 8;
-          } else {
-            return translate.x;
-          }
+      } else if (absoluteMousePosition < segment.start * 8) {
+        collisionResult = (segment.start - segment.length) * 8;
+        const newSegment = resolveCollision(collisionResult);
+        if (collisionResult < 8) {
+          return;
         }
+        if (newSegment) {
+          setTranslate({
+            initialTranslate,
+            translate,
+          });
+        } else {
+          setTranslate({
+            initialTranslate,
+            translate: { ...translate, x: collisionResult },
+          });
+        }
+
+        return;
       }
-
-      return translate.x;
     }
 
     function handleDragMove(delta: Coordinates) {
@@ -136,26 +151,15 @@ export const DraggableGridComponent = forwardRef<number, DndContextProps>(
       const newPosition = resolveCollision(translateResult);
 
       if (newPosition) {
-        setTranslate({
-          initialTranslate,
-          translate: {
-            ...translate,
-            x: moveDraggableToEdge(newPosition),
-          },
-        });
+        moveDraggableToEdge(newPosition);
       } else {
-        const zeroPosition = resolveCollision(8);
-
+        if (translateResult < 0) {
+          setTranslate({ initialTranslate, translate: { ...translate, x: 8 } });
+          return;
+        }
         setTranslate({
           initialTranslate,
-          translate: {
-            ...translate,
-            x:
-              translateResult > 8
-                ? translateResult
-                : (zeroPosition ? moveDraggableToEdge(zeroPosition) : 8) -
-                  initialWindowScroll.x,
-          },
+          translate: { ...translate, x: translateResult },
         });
       }
     }
@@ -201,7 +205,6 @@ export const DraggableGridComponent = forwardRef<number, DndContextProps>(
           });
         }}
         onDragMove={({ delta }) => {
-          // console.log(ref);
           handleDragMove(delta);
         }}
         onDragEnd={handleDragEnd}

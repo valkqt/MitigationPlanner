@@ -62,12 +62,17 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
         }
         onMouseMove={(e) => {
           const currentMousePosition =
-            e.pageX - 72 - (translate ? translate.x : 0);
+            e.pageX - 64 - (translate ? translate.x : 0);
+
           const gridMousePosition = () => {
             if (currentMousePosition % 8 === 0) {
               return currentMousePosition;
             } else {
-              return mouse;
+              let position = currentMousePosition;
+              while (!(position % 8 === 0)) {
+                position -= 1;
+              }
+              return position;
             }
           };
           setMouse(gridMousePosition());
