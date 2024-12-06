@@ -5,3 +5,12 @@ html {
 body {
   margin: 0;
 }
+
+* {
+  font-family: "Kumbh Sans";
+}
+
+@font-face {
+  font-family: "Kumbh Sans";
+  src: url("/fonts/kumbh_sans/KumbhSans-VariableFont_YOPQ,wght.ttf");
+}

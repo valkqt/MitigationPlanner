@@ -1,14 +1,7 @@
 import React, { forwardRef } from "react";
 import classNames from "classnames";
 import type { DraggableSyntheticListeners, Translate } from "@dnd-kit/core";
-
-// import { Handle } from "../DraggableItemAction/Handle";
 import { Axis } from "../../../enums/Axis";
-// import {
-//   draggable,
-//   draggableHorizontal,
-//   draggableVertical,
-// } from "./Draggable-svg";
 import styles from "./Draggable.module.css";
 import { Ability } from "../../../types";
 import DraggableEntity from "../../../pages/Encounter/SingleLane/DraggableEntity/DraggableEntity";
@@ -24,8 +17,6 @@ interface Props {
   translate?: Translate;
   ability: Ability;
   onRightClick: any;
-  setMouse: any;
-  mouse: number;
 }
 
 export const Draggable = forwardRef<HTMLButtonElement, Props>(
@@ -40,8 +31,6 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
       translate,
       ability,
       onRightClick,
-      setMouse,
-      mouse,
       ...props
     }: Props,
     ref
@@ -60,23 +49,6 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
             "--translate-y": `${translate?.y ?? 0}px`,
           } as React.CSSProperties
         }
-        onMouseMove={(e) => {
-          const currentMousePosition =
-            e.pageX - 64 - (translate ? translate.x : 0);
-
-          const gridMousePosition = () => {
-            if (currentMousePosition % 8 === 0) {
-              return currentMousePosition;
-            } else {
-              let position = currentMousePosition;
-              while (!(position % 8 === 0)) {
-                position -= 1;
-              }
-              return position;
-            }
-          };
-          setMouse(gridMousePosition());
-        }}
       >
         <button
           ref={ref}
@@ -90,15 +62,8 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
             e.preventDefault();
           }}
         >
-          {/* {axis === Axis.Vertical
-            ? draggableVertical
-            : axis === Axis.Horizontal
-            ? draggableHorizontal
-            : draggable}
-          {handle ? <Handle {...(handle ? listeners : {})} /> : null} */}
           <DraggableEntity ability={ability} />
         </button>
-        {/* {label ? <label>{label}</label> : null} */}
       </div>
     );
   }

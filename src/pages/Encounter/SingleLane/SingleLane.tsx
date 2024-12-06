@@ -1,8 +1,8 @@
-import { DraggableGridComponent } from "../../../components/DraggableGridComponent/DraggableGridComponent";
+import DraggableGridComponent from "../../../components/DraggableGridComponent/DraggableGridComponent";
 import { GenerateRandomString } from "../../../functions/GenerateRandomString";
 import { Ability, Segment } from "../../../types";
 import css from "./SingleLane.module.css";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 interface SingleLaneProps {
   ability: Ability;
@@ -11,7 +11,6 @@ interface SingleLaneProps {
 
 export default function SingleLane({ ability, duration }: SingleLaneProps) {
   const [entities, setEntities] = useState<Segment[]>([]);
-  const mouseOverRef = useRef<number>(-1);
 
   function removeSegment(id: string) {
     setEntities(
@@ -28,7 +27,6 @@ export default function SingleLane({ ability, duration }: SingleLaneProps) {
         position <= segment.start &&
         segment.start <= position + ability.cooldown
     );
-    console.log(entities);
 
     if (alreadyExists) {
       return;
@@ -58,9 +56,6 @@ export default function SingleLane({ ability, duration }: SingleLaneProps) {
             style={{ left: 64 + index * 8 }}
             id={index.toString()}
             onClick={() => createSegment(index, ability)}
-            onMouseOver={() => {
-              mouseOverRef.current = index;
-            }}
           ></div>
         );
       })}
@@ -71,9 +66,8 @@ export default function SingleLane({ ability, duration }: SingleLaneProps) {
           onRightClick={() => removeSegment(entity.segmentId)}
           key={entity.segmentId}
           entity={entity}
-          segments={entities}
-          setSegments={setEntities}
-          ref={mouseOverRef}
+          nodes={entities}
+          setNodes={setEntities}
         />
       ))}
     </div>

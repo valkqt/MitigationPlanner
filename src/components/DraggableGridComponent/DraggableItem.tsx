@@ -5,27 +5,21 @@ import { Draggable } from "./Draggable/Draggable";
 import { Ability } from "../../types";
 
 interface DraggableItemProps {
-  label: string;
   handle?: boolean;
   style?: React.CSSProperties;
   translate: Translate;
   axis?: Axis;
   ability: Ability;
   onRightClick: any;
-  setMouse: any;
-  mouse: number;
 }
 
 export default function DraggableItem({
   axis,
-  label,
   style,
   translate,
   handle,
   ability,
   onRightClick,
-  setMouse,
-  mouse,
 }: DraggableItemProps) {
   const { attributes, isDragging, listeners, setNodeRef } = useDraggable({
     id: "draggable",
@@ -36,7 +30,6 @@ export default function DraggableItem({
       ref={setNodeRef}
       dragging={isDragging}
       handle={handle}
-      label={label}
       listeners={listeners}
       style={style}
       translate={translate}
@@ -44,8 +37,6 @@ export default function DraggableItem({
       {...attributes}
       ability={ability}
       onRightClick={onRightClick}
-      setMouse={setMouse}
-      mouse={mouse}
     />
   );
 }
