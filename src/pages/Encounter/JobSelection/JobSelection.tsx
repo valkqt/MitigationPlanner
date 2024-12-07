@@ -8,7 +8,6 @@ interface JobSelectionProps {
 }
 
 export default function JobSelection({ jobs, onJobChange }: JobSelectionProps) {
-  // const [activeChecks, setActiveChecks] = useState<ActiveJob[]>([]);
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
   }
@@ -20,15 +19,15 @@ export default function JobSelection({ jobs, onJobChange }: JobSelectionProps) {
           <JobCheckbox
             job={job}
             key={job.id}
-            onToggle={() =>
+            onToggle={() => {
               onJobChange(
                 {
                   ...job,
                   active: !job.active,
                 },
                 index
-              )
-            }
+              );
+            }}
           />
         ))}
       </form>

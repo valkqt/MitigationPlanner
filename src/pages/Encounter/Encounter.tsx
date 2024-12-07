@@ -1,86 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./Encounter.module.css";
-import { Job } from "../../types";
+import { Ability, Job } from "../../types";
 import SingleLane from "./SingleLane/SingleLane";
-import classNames from "classnames";
-import Timestamp from "./Timestamp/Timestamp";
 import JobSelection from "./JobSelection/JobSelection";
-
-export const jobsWithAbilitys = [
-  {
-    id: 0,
-    name: "sge",
-    skills: [
-      {
-        id: 1,
-        name: "Holos",
-        duration: 20,
-        cooldown: 120,
-        icon: "./icons/SGE_holos.png",
-        color1: "#60cdb2",
-        color2: "#08453f",
-      },
-    ],
-    active: true,
-  },
-  {
-    id: 1,
-    name: "whm",
-    skills: [
-      {
-        id: 2,
-        name: "Temperance",
-        duration: 20,
-        cooldown: 120,
-        icon: "./icons/WHM_temperance.png",
-        color1: "white",
-        color2: "white",
-      },
-    ],
-    active: true,
-  },
-  {
-    id: 2,
-    name: "sch",
-    skills: [
-      {
-        id: 3,
-        name: "Expedience",
-        duration: 15,
-        cooldown: 120,
-        icon: "./icons/SCH_expedient.png",
-        color1: "white",
-        color2: "white",
-      },
-    ],
-    active: true,
-  },
-  {
-    id: 3,
-    name: "ast",
-    skills: [
-      {
-        id: 4,
-        name: "Collective Unconscious",
-        duration: 15,
-        cooldown: 30,
-        icon: "./icons/AST_collective_unconscious.png",
-        color1: "white",
-        color2: "white",
-      },
-    ],
-    active: true,
-  },
-];
-
-const encounter = {
-  name: "The Omega Protocol",
-  duration: 1200,
-  nodes: [{ name: "Looper", start: 20, end: 25 }],
-};
+import TimeDisplay from "./TimeDisplay/TimeDisplay";
+import { databaseJobs, encounter } from "../../globals";
 
 export default function Encounter() {
-  const [jobs, setJobs] = useState<Job[]>(jobsWithAbilitys);
+  const [jobs, setJobs] = useState<Job[]>(databaseJobs);
+  const [abilities, setAbilities] = useState<Ability[]>(initializeAbilities);
+
+  function getActiveJobs(jobs: Job[]): Job[] {
+    const activeJobs = jobs.filter((a) => a.active);
+    return activeJobs;
+  }
+
+  function getActiveAbilities(abilities: Ability[]): Ability[] {
+    const activeAbilities = abilities.filter(
+      (ability) => ability.active === true
+    );
+
+    return activeAbilities;
+  }
+
+  function initializeAbilities(): Ability[] {
+    let result: Ability[] = [];
+    jobs.forEach((job) => {
+      result = result.concat(getActiveAbilities(job.skills));
+    });
+
+    return result;
+  }
 
   return (
     <div className={css.TimelineContainer}>
@@ -90,56 +40,18 @@ export default function Encounter() {
           setJobs(jobs.toSpliced(index, 1, job));
         }}
       />
-      <div>
-        <div className={css.timeDisplay}>
-          <div>
-            <div className={css.timeNumber}>
-              {Array.from({ length: encounter.duration + 1 }, (_, index) => {
-                let hours = Math.floor(index / 3600);
-                let minutes = Math.floor((index - hours * 3600) / 60);
-                let seconds = index - hours * 3600 - minutes * 60;
-
-                if (index % 10 === 0) {
-                  return (
-                    <Timestamp
-                      seconds={seconds}
-                      minutes={minutes}
-                      key={index}
-                    />
-                  );
-                }
-              })}
-            </div>
-            <div className={css.tickContainer}>
-              {Array.from({ length: encounter.duration + 1 }, (_, index) => {
-                if (index % 10 === 0) {
-                  return (
-                    <div className={classNames(css.tick, css.tenSeconds)}></div>
-                  );
-                } else if (index % 5 === 0) {
-                  return (
-                    <div
-                      className={classNames(css.tick, css.fiveSeconds)}
-                    ></div>
-                  );
-                } else {
-                  return (
-                    <div className={classNames(css.tick, css.oneSecond)}></div>
-                  );
-                }
-              })}
-            </div>
+      {/* <div>
+        {jobs.map((a) => (
+          <div className={css.classButton}>
+            <img src={a.icon} className={css.transparentIcon} />
           </div>
-        </div>
-        {jobs.map(
-          (job) =>
-            job.active && (
-              <SingleLane
-                ability={job.skills[0]}
-                duration={encounter.duration}
-              />
-            )
-        )}
+        ))}
+      </div> */}
+      <TimeDisplay encounter={encounter} />
+      <div>
+        {abilities.map((ability) => {
+          return <SingleLane ability={ability} duration={encounter.duration} />;
+        })}
       </div>
     </div>
   );

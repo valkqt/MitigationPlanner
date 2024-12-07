@@ -8,38 +8,18 @@
   height: 48px;
 }
 
-.timeNumber {
-  display: flex;
-  margin-left: -18px;
-  gap: 44px;
+.transparentIcon {
+  width: 24px;
+  height: auto;
 }
 
-.timeDisplay {
-  background-color: black;
-  min-height: 24px;
-  padding-left: 72px;
-  flex-wrap: wrap;
-}
-
-.tickContainer {
-  display: flex;
-  width: min-content;
-}
-
-.tick {
+.classButton {
+  border-radius: 32px;
+  width: 100px;
+  background-color: white;
   box-sizing: border-box;
-  border-left: 1px solid gray;
-  width: 8px;
-}
-
-.tenSeconds {
-  height: 18px;
-}
-
-.fiveSeconds {
-  height: 12px;
-}
-
-.oneSecond {
-  height: 8px;
+  border: 2px solid gray;
+  padding: 4px;
+  display: flex;
+  align-items: center;
 }

@@ -6,6 +6,7 @@ export interface Ability {
   icon: string;
   color1: string;
   color2: string;
+  active: boolean;
 }
 
 export interface Job {
@@ -13,6 +14,7 @@ export interface Job {
   name: string;
   skills: Ability[];
   active: boolean;
+  icon: string;
 }
 
 export interface Segment {
@@ -20,4 +22,16 @@ export interface Segment {
   segmentId: string;
   start: number;
   length: number;
+}
+
+export interface Mechanic {
+  name: string;
+  start: number;
+  duration: number;
+}
+
+export interface Encounter {
+  name: string;
+  duration: number;
+  nodes: Mechanic[];
 }

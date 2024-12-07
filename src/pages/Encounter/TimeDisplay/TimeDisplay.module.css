@@ -1,0 +1,35 @@
+.timeDisplay {
+  background-color: black;
+  min-height: 24px;
+  padding-left: 64px;
+  flex-wrap: wrap;
+}
+
+.timeNumber {
+  display: flex;
+  margin-left: -18px;
+  gap: 44px;
+}
+
+.tickContainer {
+  display: flex;
+  width: min-content;
+}
+
+.tick {
+  box-sizing: border-box;
+  border-left: 1px solid gray;
+  width: 8px;
+}
+
+.tenSeconds {
+  height: 18px;
+}
+
+.fiveSeconds {
+  height: 12px;
+}
+
+.oneSecond {
+  height: 8px;
+}
