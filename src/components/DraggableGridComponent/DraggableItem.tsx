@@ -1,6 +1,6 @@
 import { Translate } from "@dnd-kit/core";
 import { useDraggable } from "@dnd-kit/core";
-import { Axis } from "../../enums/Axis";
+import { Axis } from "../../globals";
 import { Draggable } from "./Draggable/Draggable";
 import { Ability } from "../../types";
 

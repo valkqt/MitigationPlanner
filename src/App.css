@@ -1,0 +1,7 @@
+.toggleDisplay {
+  display: none !important;
+}
+
+.toggleVisibility {
+  visibility: hidden !important;
+}

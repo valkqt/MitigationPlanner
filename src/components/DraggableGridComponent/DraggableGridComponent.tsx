@@ -4,7 +4,7 @@ import {
   PointerActivationConstraint,
   Translate,
 } from "@dnd-kit/core";
-import { Axis } from "../../enums/Axis";
+import { Axis } from "../../globals";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { useState } from "react";
 import DraggableItem from "./DraggableItem";

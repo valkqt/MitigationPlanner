@@ -1,57 +1,75 @@
-// import { useState } from "react";
-// import {
-//   DndContext,
-//   closestCenter,
-//   KeyboardSensor,
-//   PointerSensor,
-//   useSensor,
-//   useSensors,
-// } from "@dnd-kit/core";
-// import {
-//   arrayMove,
-//   SortableContext,
-//   sortableKeyboardCoordinates,
-//   verticalListSortingStrategy,
-// } from "@dnd-kit/sortable";
-// import { SortableItem } from "./SortableItem/SortableItem";
-// import { Job } from "../../../types";
+import { useState } from "react";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { SortableItem } from "./SortableItem/SortableItem";
+import { Ability, Job } from "../../../types";
 
-// interface SortableRowProps {
-//   items: Job[];
-// }
+interface SortableRowProps {
+  abilities: Ability[];
+}
 
-// export default function SortableTest({ items }: SortableRowProps) {
-//   const sensors = useSensors(
-//     useSensor(PointerSensor),
-//     useSensor(KeyboardSensor, {
-//       coordinateGetter: sortableKeyboardCoordinates,
-//     })
-//   );
+export default function SortableTest({ abilities }: SortableRowProps) {
+  const [items, setItems] = useState(initializeSortableIndex);
+  const [style, setStyle] = useState("");
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
-//   return (
-//     <DndContext
-//       sensors={sensors}
-//       collisionDetection={closestCenter}
-//       onDragEnd={handleDragEnd}
-//     >
-//       <SortableContext items={items} strategy={verticalListSortingStrategy}>
-//         {items.map((ability) => (
-//           <SortableItem key={ability.id} id={ability.id} />
-//         ))}
-//       </SortableContext>
-//     </DndContext>
-//   );
+  function initializeSortableIndex(): number[] {
+    const state = abilities.map((ability) => {
+      return ability.id;
+    });
+    console.log(state);
+    return state;
+  }
 
-//   function handleDragEnd(event: any) {
-//     const { active, over } = event;
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {abilities.map((i) => (
+            <SortableItem
+              id={i.id}
+              key={i.id}
+              ability={i}
+              order={items.findIndex((a) => a === i.id)}
+            />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
+  );
 
-//     if (active.id !== over.id) {
-//       setItems((items) => {
-//         const oldIndex = items.indexOf(active.id);
-//         const newIndex = items.indexOf(over.id);
+  function handleDragEnd(event: any) {
+    const { active, over } = event;
 
-//         return arrayMove(items, oldIndex, newIndex);
-//       });
-//     }
-//   }
-// }
+    if (active.id !== over.id) {
+      console.log(items);
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+}

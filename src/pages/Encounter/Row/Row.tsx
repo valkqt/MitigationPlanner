@@ -1,15 +1,17 @@
+import classNames from "classnames";
 import DraggableGridComponent from "../../../components/DraggableGridComponent/DraggableGridComponent";
 import { GenerateRandomString } from "../../../functions/GenerateRandomString";
-import { Ability, Segment } from "../../../types";
-import css from "./SingleLane.module.css";
+import { Ability, Job, Segment } from "../../../types";
+import css from "./Row.module.css";
 import { useState } from "react";
 
-interface SingleLaneProps {
+interface RowProps {
+  jobs: Job[];
   ability: Ability;
   duration: number;
 }
 
-export default function SingleLane({ ability, duration }: SingleLaneProps) {
+export default function Row({ jobs, ability, duration }: RowProps) {
   const [entities, setEntities] = useState<Segment[]>([]);
 
   function removeSegment(id: string) {
@@ -44,7 +46,15 @@ export default function SingleLane({ ability, duration }: SingleLaneProps) {
   }
 
   return (
-    <div className={css.Lane}>
+    <div
+      className={classNames(css.Lane, {
+        toggleDisplay:
+          !ability.active ||
+          !jobs.some(
+            (j) => j.active && j.skills.some((s) => s.id == ability.id)
+          ),
+      })}
+    >
       <div className={css.LaneIconContainer}>
         <img src={ability.icon} style={{ width: "48px", height: "48px" }} />
       </div>

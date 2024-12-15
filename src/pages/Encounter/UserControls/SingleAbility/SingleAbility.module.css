@@ -1,0 +1,22 @@
+.SingleAbility {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.SingleAbility:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.AbilityLabel {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.smallAbilityIcon {
+  width: 28px;
+  height: auto;
+}

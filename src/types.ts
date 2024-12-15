@@ -1,8 +1,12 @@
+import { AbilityType, Target } from "./globals";
+
 export interface Ability {
   id: number;
   name: string;
   duration: number;
   cooldown: number;
+  target: Target;
+  type: AbilityType;
   icon: string;
   color1: string;
   color2: string;

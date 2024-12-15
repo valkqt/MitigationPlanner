@@ -1,18 +1,48 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./Encounter.module.css";
 import { Ability, Job } from "../../types";
-import SingleLane from "./SingleLane/SingleLane";
-import JobSelection from "./JobSelection/JobSelection";
+import Row from "./Row/Row";
 import TimeDisplay from "./TimeDisplay/TimeDisplay";
-import { databaseJobs, encounter } from "../../globals";
+import { AbilityType, databaseJobs, encounter, Target } from "../../globals";
+import UserControls from "./UserControls/UserControls";
 
 export default function Encounter() {
-  const [jobs, setJobs] = useState<Job[]>(databaseJobs);
   const [abilities, setAbilities] = useState<Ability[]>(initializeAbilities);
 
-  function getActiveJobs(jobs: Job[]): Job[] {
-    const activeJobs = jobs.filter((a) => a.active);
-    return activeJobs;
+  const [jobs, setJobs] = useState<Job[]>(databaseJobs);
+
+  function handleJobSelection(job: Job, index: number) {
+    setJobs(
+      jobs.toSpliced(index, 1, {
+        ...job,
+        active: !job.active,
+      })
+    );
+    return;
+  }
+
+  function toggleAbility(ability: Ability, index: number) {
+    setAbilities(
+      abilities.toSpliced(index, 1, {
+        ...ability,
+        active: !ability.active,
+      })
+    );
+  }
+
+  function handleAbilityFilter(filter: Target | AbilityType) {
+    let filtered;
+
+    if (filter in Target) {
+      filtered = abilities.map((a) => {
+        return a.target === filter ? { ...a, active: !a.active } : a;
+      });
+    } else {
+      filtered = abilities.map((a) => {
+        return a.type === filter ? { ...a, active: !a.active } : a;
+      });
+    }
+    setAbilities(filtered);
   }
 
   function getActiveAbilities(abilities: Ability[]): Ability[] {
@@ -25,7 +55,7 @@ export default function Encounter() {
 
   function initializeAbilities(): Ability[] {
     let result: Ability[] = [];
-    jobs.forEach((job) => {
+    databaseJobs.forEach((job) => {
       result = result.concat(getActiveAbilities(job.skills));
     });
 
@@ -34,23 +64,19 @@ export default function Encounter() {
 
   return (
     <div className={css.TimelineContainer}>
-      <JobSelection
+      <UserControls
         jobs={jobs}
-        onJobChange={(job, index) => {
-          setJobs(jobs.toSpliced(index, 1, job));
-        }}
+        onJobToggle={handleJobSelection}
+        abilities={abilities}
+        onAbilityToggle={toggleAbility}
+        onTargetToggle={handleAbilityFilter}
       />
-      {/* <div>
-        {jobs.map((a) => (
-          <div className={css.classButton}>
-            <img src={a.icon} className={css.transparentIcon} />
-          </div>
-        ))}
-      </div> */}
       <TimeDisplay encounter={encounter} />
       <div>
         {abilities.map((ability) => {
-          return <SingleLane ability={ability} duration={encounter.duration} />;
+          return (
+            <Row ability={ability} duration={encounter.duration} jobs={jobs} />
+          );
         })}
       </div>
     </div>

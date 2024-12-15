@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import classNames from "classnames";
 import type { DraggableSyntheticListeners, Translate } from "@dnd-kit/core";
-import { Axis } from "../../../enums/Axis";
 import styles from "./Draggable.module.css";
 import { Ability } from "../../../types";
-import DraggableEntity from "../../../pages/Encounter/SingleLane/DraggableEntity/DraggableEntity";
+import { Axis } from "../../../globals";
+import DraggableEntity from "../../../pages/Encounter/Row/DraggableEntity/DraggableEntity";
 
 interface Props {
   axis?: Axis;

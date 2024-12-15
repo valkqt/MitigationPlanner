@@ -1,0 +1,22 @@
+.UserControls {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2rem 0;
+}
+
+.AbilitySelection {
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+  overflow: scroll;
+}
+
+.jobIcon {
+  width: 48px;
+  height: 48px;
+}

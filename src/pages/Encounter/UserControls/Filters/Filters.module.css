@@ -1,0 +1,10 @@
+.FilterContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+
+.FilterHeader {
+  margin-bottom: 1rem;
+}
