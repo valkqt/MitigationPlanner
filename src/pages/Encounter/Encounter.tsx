@@ -5,58 +5,41 @@ import Row from "./Row/Row";
 import TimeDisplay from "./TimeDisplay/TimeDisplay";
 import { AbilityType, databaseJobs, encounter, Target } from "../../globals";
 import UserControls from "./UserControls/UserControls";
+import { useActivationFlagsContext } from "../../contexts/ActivationFlagsContext";
+import { FlagActivationTypes } from "../../contexts/ActivationFlagsContextProvider";
 
 export default function Encounter() {
-  const [abilities, setAbilities] = useState<Ability[]>(initializeAbilities);
+  const [abilities] = useState<Ability[]>(initializeAbilities);
 
-  const [jobs, setJobs] = useState<Job[]>(databaseJobs);
+  const [jobs] = useState<Job[]>(databaseJobs);
+  const [, setFlags] = useActivationFlagsContext();
 
-  function handleJobSelection(job: Job, index: number) {
-    setJobs(
-      jobs.toSpliced(index, 1, {
-        ...job,
-        active: !job.active,
-      })
-    );
-    return;
+  function handleJobSelection(jobId: number) {
+    setFlags({ type: FlagActivationTypes.ToggleJobFlag, payload: jobId });
   }
 
-  function toggleAbility(ability: Ability, index: number) {
-    setAbilities(
-      abilities.toSpliced(index, 1, {
-        ...ability,
-        active: !ability.active,
-      })
-    );
+  function toggleAbility(abilityId: number) {
+    setFlags({
+      type: FlagActivationTypes.ToggleAbilityFlag,
+      payload: abilityId,
+    });
   }
 
   function handleAbilityFilter(filter: Target | AbilityType) {
-    let filtered;
-
     if (filter in Target) {
-      filtered = abilities.map((a) => {
-        return a.target === filter ? { ...a, active: !a.active } : a;
-      });
+      setFlags({ type: FlagActivationTypes.ToggleTargetFlag, payload: filter });
     } else {
-      filtered = abilities.map((a) => {
-        return a.type === filter ? { ...a, active: !a.active } : a;
+      setFlags({
+        type: FlagActivationTypes.ToggleAbilityTypeFlag,
+        payload: filter,
       });
     }
-    setAbilities(filtered);
-  }
-
-  function getActiveAbilities(abilities: Ability[]): Ability[] {
-    const activeAbilities = abilities.filter(
-      (ability) => ability.active === true
-    );
-
-    return activeAbilities;
   }
 
   function initializeAbilities(): Ability[] {
     let result: Ability[] = [];
     databaseJobs.forEach((job) => {
-      result = result.concat(getActiveAbilities(job.skills));
+      result = result.concat(job.skills);
     });
 
     return result;

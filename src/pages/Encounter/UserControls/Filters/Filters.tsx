@@ -1,22 +1,19 @@
 import css from "./Filters.module.css";
 import SingleFilter from "./SingleFilter/SingleFilter";
 import { Ability } from "../../../../types";
+import { AbilityType, Target } from "../../../../globals";
 
 interface FiltersProps {
-  onToggle: any;
   abilities: Ability[];
   onTargetToggle: any;
 }
 
 export default function Filters({ onTargetToggle }: FiltersProps) {
-  const targetTypes = ["Individual", "Party", "Self"];
-  const abilityTypes = ["Mitigation", "Healing", "Other"];
-
   return (
     <div className={css.FilterContainer}>
       <div>
         <div className={css.FilterHeader}>Target:</div>
-        {targetTypes.map((type) => (
+        {Array.from(Object.values(Target)).map((type) => (
           <SingleFilter
             label={type}
             onClickToggle={onTargetToggle}
@@ -26,7 +23,7 @@ export default function Filters({ onTargetToggle }: FiltersProps) {
       </div>
       <div>
         <div className={css.FilterHeader}>Type:</div>
-        {abilityTypes.map((type) => (
+        {Array.from(Object.values(AbilityType)).map((type) => (
           <SingleFilter
             label={type}
             onClickToggle={onTargetToggle}

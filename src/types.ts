@@ -10,14 +10,12 @@ export interface Ability {
   icon: string;
   color1: string;
   color2: string;
-  active: boolean;
 }
 
 export interface Job {
   id: number;
   name: string;
   skills: Ability[];
-  active: boolean;
   icon: string;
 }
 
@@ -38,4 +36,11 @@ export interface Encounter {
   name: string;
   duration: number;
   nodes: Mechanic[];
+}
+
+export interface GlobalFlags {
+  jobs: Record<number, boolean>;
+  abilities: Record<number, boolean>;
+  target: Record<string, boolean>;
+  type: Record<string, boolean>;
 }

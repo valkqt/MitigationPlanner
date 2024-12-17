@@ -4,6 +4,7 @@ import { GenerateRandomString } from "../../../functions/GenerateRandomString";
 import { Ability, Job, Segment } from "../../../types";
 import css from "./Row.module.css";
 import { useState } from "react";
+import { useActivationFlagsContext } from "../../../contexts/ActivationFlagsContext";
 
 interface RowProps {
   jobs: Job[];
@@ -13,6 +14,7 @@ interface RowProps {
 
 export default function Row({ jobs, ability, duration }: RowProps) {
   const [entities, setEntities] = useState<Segment[]>([]);
+  const [flags] = useActivationFlagsContext();
 
   function removeSegment(id: string) {
     setEntities(
@@ -49,10 +51,13 @@ export default function Row({ jobs, ability, duration }: RowProps) {
     <div
       className={classNames(css.Lane, {
         toggleDisplay:
-          !ability.active ||
+          !flags.abilities[ability.id] ||
           !jobs.some(
-            (j) => j.active && j.skills.some((s) => s.id == ability.id)
-          ),
+            (job) =>
+              flags.jobs[job.id] && job.skills.some((a) => a.id == ability.id)
+          ) ||
+          !flags.target[ability.target] ||
+          !flags.type[ability.type],
       })}
     >
       <div className={css.LaneIconContainer}>

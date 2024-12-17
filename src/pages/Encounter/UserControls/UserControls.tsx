@@ -21,19 +21,14 @@ export default function UserControls({
 }: UserControlsProps) {
   return (
     <div className={css.UserControls}>
-      <Filters
-        onTargetToggle={onTargetToggle}
-        abilities={abilities}
-        onToggle={() => {}}
-      />
+      <Filters onTargetToggle={onTargetToggle} abilities={abilities} />
       <JobSelection jobs={jobs} onToggle={onJobToggle} />
       <div className={css.AbilitySelection}>
-        {abilities.map((ability, index) => (
+        {abilities.map((ability) => (
           <SingleAbility
             ability={ability}
-            index={index}
             onToggle={onAbilityToggle}
-            key={index}
+            key={ability.id}
           />
         ))}
       </div>

@@ -1,22 +1,24 @@
 import css from "./JobSelection.module.css";
 import { Job } from "../../../../types";
 import classNames from "classnames";
+import { useActivationFlagsContext } from "../../../../contexts/ActivationFlagsContext";
 
 interface JobSelectionProps {
   jobs: Job[];
-  onToggle: (job: Job, index: number) => void;
+  onToggle: (jobId: number) => void;
 }
 
 export default function JobSelection({ jobs, onToggle }: JobSelectionProps) {
+  const [flags] = useActivationFlagsContext();
   return (
     <div className={css.JobSelection}>
       {jobs.map((job, index) => (
-        <div key={index} onClick={() => onToggle(job, index)}>
+        <div key={index} onClick={() => onToggle(job.id)}>
           <div
             className={classNames(
               {
-                [css.active]: job.active,
-                [css.inactive]: !job.active,
+                [css.active]: flags.jobs[job.id],
+                [css.inactive]: !flags.jobs[job.id],
               },
               css.classButton
             )}
