@@ -25,6 +25,13 @@ export default function Encounter() {
     });
   }
 
+  function handleLevelFilter(threshold: number) {
+    setFlags({
+      type: FlagActivationTypes.LevelFilterFlag,
+      payload: threshold,
+    });
+  }
+
   function handleAbilityFilter(filter: Target | AbilityType) {
     if (filter in Target) {
       setFlags({ type: FlagActivationTypes.ToggleTargetFlag, payload: filter });
@@ -53,6 +60,7 @@ export default function Encounter() {
         abilities={abilities}
         onAbilityToggle={toggleAbility}
         onTargetToggle={handleAbilityFilter}
+        onLevelFilter={handleLevelFilter}
       />
       <TimeDisplay encounter={encounter} />
       <div>

@@ -5,8 +5,8 @@ export let absoluteMousePosition: number;
 document.addEventListener("mousemove", (e) => {
   absoluteMousePosition = e.pageX - 64;
 
-  if (absoluteMousePosition % 8 === 0) {
-    return absoluteMousePosition;
+  if (absoluteMousePosition % 8 !== 0) {
+    return;
   }
 });
 

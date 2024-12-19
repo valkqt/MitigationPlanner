@@ -8,12 +8,14 @@ export enum FlagActivationTypes {
   ToggleAbilityFlag = "toggleAbilityFlag",
   ToggleTargetFlag = "toggleTargetFlag",
   ToggleAbilityTypeFlag = "toggleAbilityTypeFlag",
+  LevelFilterFlag = "levelFilterFlag",
 }
 
 interface ActionWithNumber {
   type:
     | FlagActivationTypes.ToggleJobFlag
-    | FlagActivationTypes.ToggleAbilityFlag;
+    | FlagActivationTypes.ToggleAbilityFlag
+    | FlagActivationTypes.LevelFilterFlag;
   payload: number;
 }
 
@@ -61,6 +63,12 @@ function reducer(state: GlobalFlags, action: FlagActivationAction) {
         ...state.type,
         [action.payload]: !state.type[action.payload],
       },
+    };
+  }
+  if (action.type === "levelFilterFlag") {
+    return {
+      ...state,
+      level: action.payload,
     };
   }
 

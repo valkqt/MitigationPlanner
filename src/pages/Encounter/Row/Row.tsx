@@ -5,6 +5,7 @@ import { Ability, Job, Segment } from "../../../types";
 import css from "./Row.module.css";
 import { useState } from "react";
 import { useActivationFlagsContext } from "../../../contexts/ActivationFlagsContext";
+import { absoluteMousePosition } from "../../../App";
 
 interface RowProps {
   jobs: Job[];
@@ -26,13 +27,38 @@ export default function Row({ jobs, ability, duration }: RowProps) {
   }
 
   function createSegment(position: number, ability: Ability) {
-    const alreadyExists = entities.some(
+    while (position % 8 !== 0) {
+      position -= 1;
+    }
+
+    position = position / 8;
+    const newSegment = entities.find(
       (segment) =>
         position <= segment.start &&
         segment.start <= position + ability.cooldown
     );
 
-    if (alreadyExists) {
+    if (newSegment) {
+      const alreadyExists2 = entities.find(
+        (node) =>
+          node.start < newSegment.start - newSegment.length &&
+          newSegment.start - newSegment.length < node.start + node.length
+      );
+      position = newSegment.start - newSegment.length;
+
+      if (alreadyExists2 || position <= 0) {
+        return;
+      } else {
+        setEntities([
+          ...entities,
+          {
+            abilityId: ability.id,
+            segmentId: GenerateRandomString(),
+            length: ability.cooldown,
+            start: position === 0 ? position + 1 : position,
+          },
+        ]);
+      }
       return;
     }
 
@@ -57,7 +83,8 @@ export default function Row({ jobs, ability, duration }: RowProps) {
               flags.jobs[job.id] && job.skills.some((a) => a.id == ability.id)
           ) ||
           !flags.target[ability.target] ||
-          !flags.type[ability.type],
+          !flags.type[ability.type] ||
+          !(ability.level <= flags.level),
       })}
     >
       <div className={css.LaneIconContainer}>
@@ -70,7 +97,7 @@ export default function Row({ jobs, ability, duration }: RowProps) {
             className={css.filler}
             style={{ left: 64 + index * 8 }}
             id={index.toString()}
-            onClick={() => createSegment(index, ability)}
+            onClick={() => createSegment(absoluteMousePosition, ability)}
           ></div>
         );
       })}

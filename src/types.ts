@@ -7,6 +7,7 @@ export interface Ability {
   cooldown: number;
   target: Target;
   type: AbilityType;
+  level: number;
   icon: string;
   color1: string;
   color2: string;
@@ -43,4 +44,5 @@ export interface GlobalFlags {
   abilities: Record<number, boolean>;
   target: Record<string, boolean>;
   type: Record<string, boolean>;
+  level: number;
 }

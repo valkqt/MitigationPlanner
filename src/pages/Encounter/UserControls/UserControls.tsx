@@ -10,6 +10,7 @@ interface UserControlsProps {
   abilities: Ability[];
   onAbilityToggle: any;
   onTargetToggle: any;
+  onLevelFilter: any;
 }
 
 export default function UserControls({
@@ -18,10 +19,15 @@ export default function UserControls({
   abilities,
   onAbilityToggle,
   onTargetToggle,
+  onLevelFilter,
 }: UserControlsProps) {
   return (
     <div className={css.UserControls}>
-      <Filters onTargetToggle={onTargetToggle} abilities={abilities} />
+      <Filters
+        onTargetToggle={onTargetToggle}
+        abilities={abilities}
+        onLevelFilter={onLevelFilter}
+      />
       <JobSelection jobs={jobs} onToggle={onJobToggle} />
       <div className={css.AbilitySelection}>
         {abilities.map((ability) => (

@@ -7,6 +7,14 @@ export const defaultCoordinates = {
   y: 0,
 };
 
+export const maxLevel = 100;
+export const levelArray: number[] = Array.from(
+  { length: maxLevel / 10 - 4 },
+  (_, index) => {
+    return 50 + index * 10;
+  }
+);
+
 export enum Axis {
   All,
   Vertical,
@@ -35,6 +43,7 @@ const sageSkills = [
     cooldown: 120,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 76,
     icon: "./icons/SGE/holos.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -46,6 +55,7 @@ const sageSkills = [
     cooldown: 60,
     target: Target.Single,
     type: AbilityType.Healing,
+    level: 86,
     icon: "./icons/SGE/krasis.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -57,6 +67,7 @@ const sageSkills = [
     cooldown: 120,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 80,
     icon: "./icons/SGE/panhaima.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -68,6 +79,7 @@ const sageSkills = [
     cooldown: 60,
     target: Target.Party,
     type: AbilityType.Healing,
+    level: 20,
     icon: "./icons/SGE/physis_II.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -79,6 +91,7 @@ const sageSkills = [
     cooldown: 30,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 50,
     icon: "./icons/SGE/kerachole.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -90,6 +103,7 @@ const sageSkills = [
     cooldown: 120,
     target: Target.Party,
     type: AbilityType.Healing,
+    level: 90,
     icon: "./icons/SGE/pneuma.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -101,6 +115,7 @@ const sageSkills = [
     cooldown: 90,
     target: Target.Self,
     type: AbilityType.Other,
+    level: 56,
     icon: "./icons/SGE/zoe.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -112,6 +127,7 @@ const sageSkills = [
     cooldown: 60,
     target: Target.Self,
     type: AbilityType.Healing,
+    level: 35,
     icon: "./icons/SGE/soteria.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -123,6 +139,7 @@ const sageSkills = [
     cooldown: 120,
     target: Target.Single,
     type: AbilityType.Mitigation,
+    level: 70,
     icon: "./icons/SGE/haima.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -134,6 +151,7 @@ const sageSkills = [
     cooldown: 180,
     target: Target.Party,
     type: AbilityType.Healing,
+    level: 100,
     icon: "./icons/SGE/philosophia.png",
     color1: "#60cdb2",
     color2: "#08453f",
@@ -147,6 +165,7 @@ const whmSkills = [
     cooldown: 120,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 20,
     icon: "./icons/WHM_temperance.png",
     color1: "white",
     color2: "white",
@@ -161,6 +180,7 @@ const schSkills = [
     cooldown: 120,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 20,
     icon: "./icons/SCH_expedient.png",
     color1: "white",
     color2: "white",
@@ -175,6 +195,7 @@ const astSkills = [
     cooldown: 30,
     target: Target.Party,
     type: AbilityType.Mitigation,
+    level: 20,
     icon: "./icons/AST_collective_unconscious.png",
     color1: "white",
     color2: "white",
@@ -213,14 +234,14 @@ export const defaultFlags: GlobalFlags = {
   jobs: { 1: true, 2: false, 3: false, 4: false },
   abilities: {
     1: true,
-    2: false,
+    2: true,
     3: true,
     4: true,
     5: true,
     6: true,
     7: true,
-    8: false,
-    9: false,
+    8: true,
+    9: true,
     10: true,
     200: true,
     300: true,
@@ -228,6 +249,7 @@ export const defaultFlags: GlobalFlags = {
   },
   target: { Single: false, Party: true, Self: false },
   type: { Healing: false, Mitigation: true, Other: false },
+  level: maxLevel,
 };
 
 export const encounter = {
