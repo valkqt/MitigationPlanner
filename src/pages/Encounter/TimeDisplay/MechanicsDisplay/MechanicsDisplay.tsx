@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Encounter } from "../../../../types";
 import css from "./MechanicsDisplay.module.css";
 import classNames from "classnames";
-import SingleMechanic from "./SingleMechanic/SingleMechanic";
 import Bullet from "./Bullet";
 import { gridSize } from "../../../../globals";
 import BossRow from "../../Row/BossRow";

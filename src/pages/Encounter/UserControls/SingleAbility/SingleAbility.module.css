@@ -5,7 +5,7 @@
 }
 
 .SingleAbility:hover {
-  background-color: gray;
+  background-color: var(--inactive-hover);
   cursor: pointer;
 }
 
@@ -14,9 +14,4 @@
   gap: 1rem;
   width: 100%;
   justify-content: space-between;
-}
-
-.smallAbilityIcon {
-  width: 28px;
-  height: auto;
 }

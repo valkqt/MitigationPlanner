@@ -11,21 +11,21 @@ interface JobSelectionProps {
 export default function JobSelection({ jobs, onToggle }: JobSelectionProps) {
   const [flags] = useActivationFlagsContext();
   return (
-    <div className={css.JobSelection}>
+    <div className={css.filter}>
       {jobs.map((job, index) => (
-        <div key={index} onClick={() => onToggle(job.id)}>
-          <div
-            className={classNames(
-              {
-                [css.active]: flags.jobs[job.id],
-                [css.inactive]: !flags.jobs[job.id],
-              },
-              css.classButton
-            )}
-          >
-            <img src={job.icon} className={css.transparentIcon} />
-            <div className={css.JobName}>{job.name}</div>
-          </div>
+        <div
+          className={classNames(
+            {
+              [css.active]: flags.jobs[job.id],
+              [css.inactive]: !flags.jobs[job.id],
+            },
+            css.button
+          )}
+          key={index}
+          onClick={() => onToggle(job.id)}
+        >
+          <img src={job.icon} className={css.transparentIcon} />
+          <div className={css.JobName}>{job.name}</div>
         </div>
       ))}
     </div>

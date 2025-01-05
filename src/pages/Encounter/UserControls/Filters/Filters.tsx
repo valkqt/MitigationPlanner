@@ -1,11 +1,11 @@
 import css from "./Filters.module.css";
 import SingleFilter from "./SingleFilter/SingleFilter";
-import { Ability } from "../../../../types";
+import { PlayerSkill } from "../../../../types";
 import { PlayerSkillType, SkillTarget } from "../../../../globals";
 import LevelFilter from "./LevelFilter/LevelFilter";
 
 interface FiltersProps {
-  abilities: Ability[];
+  abilities: PlayerSkill[];
   onSkillTargetToggle: any;
   onLevelFilter: any;
 }
@@ -15,14 +15,13 @@ export default function Filters({
   onLevelFilter,
 }: FiltersProps) {
   return (
-    <div className={css.FilterContainer}>
+    <div className={css.container}>
       <div>
-        <div className={css.FilterHeader}>Level:</div>
+        <div className={css.header}>Level:</div>
         <LevelFilter onLevelFilter={onLevelFilter} />
       </div>
-
       <div>
-        <div className={css.FilterHeader}>SkillTarget:</div>
+        <div className={css.header}>Target:</div>
         {Array.from(Object.values(SkillTarget)).map((type) => (
           <SingleFilter
             label={type}
@@ -32,7 +31,7 @@ export default function Filters({
         ))}
       </div>
       <div>
-        <div className={css.FilterHeader}>Type:</div>
+        <div className={css.header}>Type:</div>
         {Array.from(Object.values(PlayerSkillType)).map((type) => (
           <SingleFilter
             label={type}

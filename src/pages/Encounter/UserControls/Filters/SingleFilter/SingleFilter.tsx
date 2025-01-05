@@ -21,8 +21,8 @@ export default function SingleFilter({
     }
   }
   return (
-    <div className={css.SingleFilter} onClick={() => onClickToggle(label)}>
-      <label>{label}</label>
+    <div className={css.filter} onClick={() => onClickToggle(label)}>
+      {label}
       <div className={classNames({ toggleVisibility: !toggleCheckmark() })}>
         &#10003;
       </div>

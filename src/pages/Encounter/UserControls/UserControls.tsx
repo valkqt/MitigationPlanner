@@ -1,13 +1,13 @@
 import css from "./UserControls.module.css";
-import { Ability, Job } from "../../../types";
+import { PlayerSkill, Job } from "../../../types";
 import JobSelection from "./JobSelection/JobSelection";
-import SingleAbility from "./SingleAbility/SingleAbility";
 import Filters from "./Filters/Filters";
+import AbilityFilter from "./AbilityFilter/AbilityFilter";
 
 interface UserControlsProps {
   jobs: Job[];
   onJobToggle: any;
-  abilities: Ability[];
+  abilities: PlayerSkill[];
   onAbilityToggle: any;
   onSkillTargetToggle: any;
   onLevelFilter: any;
@@ -29,15 +29,11 @@ export default function UserControls({
         onLevelFilter={onLevelFilter}
       />
       <JobSelection jobs={jobs} onToggle={onJobToggle} />
-      <div className={css.AbilitySelection}>
-        {abilities.map((ability) => (
-          <SingleAbility
-            ability={ability}
-            onToggle={onAbilityToggle}
-            key={ability.id}
-          />
-        ))}
-      </div>
+      <AbilityFilter
+        onAbilityToggle={onAbilityToggle}
+        abilities={abilities}
+        jobs={jobs}
+      />
     </div>
   );
 }

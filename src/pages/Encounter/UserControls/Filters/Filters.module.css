@@ -1,10 +1,10 @@
-.FilterContainer {
+.container {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
 
-
-.FilterHeader {
+.header {
   margin-bottom: 1rem;
+  padding-left: 8px;
 }

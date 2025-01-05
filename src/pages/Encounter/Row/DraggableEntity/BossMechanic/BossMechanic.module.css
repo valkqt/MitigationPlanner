@@ -8,6 +8,10 @@
   position: absolute;
 }
 
+.container:first-child {
+  border-left: 1px solid white;
+}
+
 .label {
   overflow: hidden;
   text-overflow: "..";

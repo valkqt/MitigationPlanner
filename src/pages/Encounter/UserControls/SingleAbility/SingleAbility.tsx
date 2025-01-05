@@ -1,10 +1,10 @@
 import { useActivationFlagsContext } from "../../../../contexts/ActivationFlagsContext";
-import { Ability } from "../../../../types";
+import { PlayerSkill } from "../../../../types";
 import css from "./SingleAbility.module.css";
 import classNames from "classnames";
 
 interface SingleAbilityProps {
-  ability: Ability;
+  ability: PlayerSkill;
   onToggle: any;
 }
 export default function SingleAbility({
@@ -15,7 +15,7 @@ export default function SingleAbility({
   return (
     <div className={css.SingleAbility} onClick={() => onToggle(ability.id)}>
       <div>
-        <img src={ability.icon} className={css.smallAbilityIcon} />
+        <img src={ability.icon} className={"smallAbilityIcon"} />
       </div>
 
       <div className={css.AbilityLabel}>

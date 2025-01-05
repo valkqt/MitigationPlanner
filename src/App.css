@@ -6,8 +6,13 @@
   visibility: hidden !important;
 }
 
-.greyText {
-  color: rgb(146, 146, 146);
+.smallAbilityIcon {
+  width: 28px;
+  height: auto;
+}
+.miniIcon {
+  width: 20px;
+  height: 20px;
 }
 
 .showDraggableTracking::before {
@@ -31,4 +36,13 @@
   padding-left: 8px;
   top: 0px;
   left: 0;
+}
+
+:root {
+  --healer: #346624;
+  --healer-hover: #3ba318;
+  --tank: "";
+  --tank-hover: "";
+  --inactive: rgb(70, 70, 70);
+  --inactive-hover: rgb(90, 90, 90);
 }

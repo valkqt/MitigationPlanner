@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+  overflow: scroll;
+  padding: 1rem;
+  background-color: rgb(32, 32, 32);
+  border-radius: 0.25rem;
+}
+
+.jobFilter {
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+}
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: black;
+  padding: 8px;
+  border-radius: 0.25rem;
+}
+
+.dropdownItem {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: var(--inactive-hover);
+}
