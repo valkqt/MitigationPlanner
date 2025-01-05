@@ -1,8 +1,9 @@
-import { Ability } from "../../../../types";
+import { gridSize } from "../../../../globals";
+import { PlayerSkill } from "../../../../types";
 import css from "./DraggableEntity.module.css";
 
 interface DraggableEntityProps {
-  ability: Ability;
+  ability: PlayerSkill;
 }
 
 export default function DraggableEntity({ ability }: DraggableEntityProps) {
@@ -14,7 +15,7 @@ export default function DraggableEntity({ ability }: DraggableEntityProps) {
       <div
         className={css.segment}
         style={{
-          width: ability.duration * 8 + "px",
+          width: ability.duration * gridSize + "px",
           backgroundColor: ability.color1,
         }}
       >
@@ -25,13 +26,9 @@ export default function DraggableEntity({ ability }: DraggableEntityProps) {
       </div>
       <div
         style={{
-          width: (ability.cooldown - ability.duration) * 8 + "px",
+          width: (ability.cooldown - ability.duration) * gridSize + "px",
         }}
       ></div>
-      {/* <div className={css.IconContainer}>
-        <img src={ability.icon} className={css.AbilityIcon} />
-      </div>
-      <div> {ability.name}</div> */}
     </div>
   );
 }

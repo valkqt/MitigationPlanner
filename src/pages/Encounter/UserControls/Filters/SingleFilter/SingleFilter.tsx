@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import css from "./SingleFilter.module.css";
 import { useActivationFlagsContext } from "../../../../../contexts/ActivationFlagsContext";
-import { AbilityType, Target } from "../../../../../globals";
+import { PlayerSkillType, SkillTarget } from "../../../../../globals";
 
 interface SingleFilterProps {
-  label: Target | AbilityType;
-  onClickToggle: (lbl: Target | AbilityType) => void;
+  label: SkillTarget | PlayerSkillType;
+  onClickToggle: (lbl: SkillTarget | PlayerSkillType) => void;
 }
 export default function SingleFilter({
   label,
@@ -14,7 +14,7 @@ export default function SingleFilter({
   const [flags] = useActivationFlagsContext();
 
   function toggleCheckmark() {
-    if (label in Target) {
+    if (label in SkillTarget) {
       return flags.target[label];
     } else {
       return flags.type[label];

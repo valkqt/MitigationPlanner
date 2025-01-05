@@ -9,7 +9,7 @@ interface UserControlsProps {
   onJobToggle: any;
   abilities: Ability[];
   onAbilityToggle: any;
-  onTargetToggle: any;
+  onSkillTargetToggle: any;
   onLevelFilter: any;
 }
 
@@ -18,13 +18,13 @@ export default function UserControls({
   onJobToggle,
   abilities,
   onAbilityToggle,
-  onTargetToggle,
+  onSkillTargetToggle,
   onLevelFilter,
 }: UserControlsProps) {
   return (
     <div className={css.UserControls}>
       <Filters
-        onTargetToggle={onTargetToggle}
+        onSkillTargetToggle={onSkillTargetToggle}
         abilities={abilities}
         onLevelFilter={onLevelFilter}
       />

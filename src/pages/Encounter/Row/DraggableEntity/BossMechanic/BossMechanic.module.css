@@ -1,0 +1,25 @@
+.container {
+  /* border-radius: 0.2rem; */
+  /* border: 1px solid black; */
+  white-space: nowrap;
+  border-right: 1px solid white;
+  margin-left: -1px;
+  font-size: 13px;
+  position: absolute;
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: "..";
+  padding: 4px;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgb(17, 17, 17);
+  left: -4px;
+  top: -4px;
+  border-radius: 0.25rem;
+  padding: 8px;
+  z-index: 100;
+}

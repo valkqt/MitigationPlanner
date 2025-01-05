@@ -13,14 +13,13 @@ export default function LevelFilter({ onLevelFilter }: LevelFilterProps) {
         try {
           const levelCap = parseInt(e.target.value);
           onLevelFilter(levelCap);
-          console.log();
         } catch {
           console.error("bro");
         }
       }}
     >
       {levelArray.map((level) => (
-        <option value={level} key={level} selected={level === flags.level}>
+        <option value={level} key={level} defaultValue={flags.level}>
           {level}
         </option>
       ))}

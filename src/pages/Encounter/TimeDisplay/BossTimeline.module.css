@@ -1,0 +1,12 @@
+.timeDisplay {
+  background-color: black;
+  min-height: 24px;
+  padding-left: 64px;
+  position: relative;
+  z-index: 10;
+}
+
+.tickContainer {
+  display: flex;
+  width: min-content;
+}

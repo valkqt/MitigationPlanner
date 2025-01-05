@@ -16,6 +16,7 @@ interface Props {
   style?: React.CSSProperties;
   translate?: Translate;
   ability: Ability;
+  onMove: boolean;
   onRightClick: any;
 }
 
@@ -31,6 +32,7 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
       translate,
       ability,
       onRightClick,
+      onMove,
       ...props
     }: Props,
     ref
@@ -41,7 +43,8 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
           styles.Draggable,
           dragOverlay && styles.dragOverlay,
           dragging && styles.dragging,
-          handle && styles.handle
+          handle && styles.handle,
+          { showDraggableTracking: onMove }
         )}
         style={
           {

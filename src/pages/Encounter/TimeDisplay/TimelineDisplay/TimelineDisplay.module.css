@@ -1,11 +1,4 @@
-.timeDisplay {
-  background-color: black;
-  min-height: 24px;
-  padding-left: 64px;
-  flex-wrap: wrap;
-}
-
-.timeNumber {
+.timelineNumbers {
   display: flex;
   margin-left: -18px;
   gap: 44px;

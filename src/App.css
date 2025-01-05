@@ -5,3 +5,30 @@
 .toggleVisibility {
   visibility: hidden !important;
 }
+
+.greyText {
+  color: rgb(146, 146, 146);
+}
+
+.showDraggableTracking::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: -1px;
+  z-index: -100;
+  height: 100vh;
+  border-left: 1px solid white;
+  pointer-events: none;
+}
+
+.mechanicsText {
+  font-size: 12px;
+  white-space: nowrap;
+  height: 100%;
+  /* transform: rotate(-39.5deg); */
+  position: absolute;
+  padding-left: 8px;
+  top: 0px;
+  left: 0;
+}

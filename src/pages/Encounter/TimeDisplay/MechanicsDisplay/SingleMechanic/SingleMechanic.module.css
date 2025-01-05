@@ -1,0 +1,7 @@
+.spaceBorder {
+  border-left: 1px solid gray;
+  height: 100%;
+  position: relative;
+  left: -2rem;
+  transform: rotate(-38.5deg);
+}

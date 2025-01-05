@@ -1,22 +1,14 @@
-import { AbilityType, Target } from "./globals";
-
-export interface Ability {
-  id: number;
-  name: string;
-  duration: number;
-  cooldown: number;
-  target: Target;
-  type: AbilityType;
-  level: number;
-  icon: string;
-  color1: string;
-  color2: string;
-}
+import {
+  DamageType,
+  EnemySkillType,
+  PlayerSkillType,
+  SkillTarget,
+} from "./globals";
 
 export interface Job {
   id: number;
   name: string;
-  skills: Ability[];
+  skills: PlayerSkill[];
   icon: string;
 }
 
@@ -27,16 +19,50 @@ export interface Segment {
   length: number;
 }
 
-export interface Mechanic {
+export enum Source {
+  Ally,
+  Boss,
+  Enemy,
+}
+
+export interface EnemySkill {
+  id: number;
   name: string;
-  start: number;
+  source: Source;
+  castTime: number;
+  target: SkillTarget;
+  type: EnemySkillType;
+  damageType: DamageType;
+  icon: string;
+  color1: string;
+  color2: string;
+}
+
+export interface PlayerSkill {
+  id: number;
+  name: string;
+  level: number;
+  cooldown: number;
   duration: number;
+  target: SkillTarget;
+  type: PlayerSkillType;
+  icon: string;
+  color1: string;
+  color2: string;
+}
+
+export interface Timeline {
+  id: number;
+  timestamp: number;
+  duration: number;
+  mechanic: EnemySkill;
 }
 
 export interface Encounter {
   name: string;
+  level: number;
   duration: number;
-  nodes: Mechanic[];
+  nodes: Timeline[];
 }
 
 export interface GlobalFlags {

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import DraggableGridComponent from "../../../components/DraggableGridComponent/DraggableGridComponent";
 import { GenerateRandomString } from "../../../functions/GenerateRandomString";
-import { Ability, Job, Segment } from "../../../types";
+import { PlayerSkill, Job, Segment } from "../../../types";
 import css from "./Row.module.css";
 import { useState } from "react";
 import { useActivationFlagsContext } from "../../../contexts/ActivationFlagsContext";
@@ -9,7 +9,7 @@ import { absoluteMousePosition } from "../../../App";
 
 interface RowProps {
   jobs: Job[];
-  ability: Ability;
+  ability: PlayerSkill;
   duration: number;
 }
 
@@ -26,7 +26,7 @@ export default function Row({ jobs, ability, duration }: RowProps) {
     );
   }
 
-  function createSegment(position: number, ability: Ability) {
+  function createSegment(position: number, ability: PlayerSkill) {
     while (position % 8 !== 0) {
       position -= 1;
     }
@@ -90,6 +90,7 @@ export default function Row({ jobs, ability, duration }: RowProps) {
       <div className={css.LaneIconContainer}>
         <img src={ability.icon} style={{ width: "48px", height: "48px" }} />
       </div>
+
       {Array.from({ length: duration + 1 }, (_, index) => {
         return (
           <div

@@ -47,6 +47,7 @@ export default function DraggableGridComponent({
       initialTranslate: { ...defaultCoordinates, x: entity.start * 8 },
       translate: { ...defaultCoordinates, x: entity.start * 8 },
     });
+  const [isDragging, setIsDragging] = useState(false);
 
   function checkCollision(coordinates: number): Segment | undefined {
     const dragSegmentStart = coordinates / 8;
@@ -144,6 +145,7 @@ export default function DraggableGridComponent({
         };
       });
     }
+    setIsDragging(false);
     updatePosition();
   }
 
@@ -151,6 +153,7 @@ export default function DraggableGridComponent({
     <DndContext
       onDragMove={({ delta }) => {
         handleDragMove(delta);
+        setIsDragging(true);
       }}
       onDragEnd={handleDragEnd}
       onDragCancel={() => {
@@ -168,6 +171,7 @@ export default function DraggableGridComponent({
         translate={translate}
         ability={ability}
         onRightClick={onRightClick}
+        isMoving={isDragging}
       />
     </DndContext>
   );

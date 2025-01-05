@@ -7,6 +7,13 @@
   overflow: visible;
 }
 
+.BossLane {
+  padding-left: 64px;
+  position: relative;
+  width: 100%;
+  height: 32px;
+}
+
 .filler {
   min-width: 8px;
   height: 48px;

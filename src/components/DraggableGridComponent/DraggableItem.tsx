@@ -11,6 +11,7 @@ interface DraggableItemProps {
   axis?: Axis;
   ability: Ability;
   onRightClick: any;
+  isMoving: boolean;
 }
 
 export default function DraggableItem({
@@ -20,6 +21,7 @@ export default function DraggableItem({
   handle,
   ability,
   onRightClick,
+  isMoving,
 }: DraggableItemProps) {
   const { attributes, isDragging, listeners, setNodeRef } = useDraggable({
     id: "draggable",
@@ -37,6 +39,7 @@ export default function DraggableItem({
       {...attributes}
       ability={ability}
       onRightClick={onRightClick}
+      onMove={isMoving}
     />
   );
 }

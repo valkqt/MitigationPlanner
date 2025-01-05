@@ -6,8 +6,8 @@ import { defaultFlags } from "../globals";
 export enum FlagActivationTypes {
   ToggleJobFlag = "toggleJobFlag",
   ToggleAbilityFlag = "toggleAbilityFlag",
-  ToggleTargetFlag = "toggleTargetFlag",
-  ToggleAbilityTypeFlag = "toggleAbilityTypeFlag",
+  ToggleSkillTargetFlag = "toggleSkillTargetFlag",
+  TogglePlayerSkillTypeFlag = "togglePlayerSkillTypeFlag",
   LevelFilterFlag = "levelFilterFlag",
 }
 
@@ -21,8 +21,8 @@ interface ActionWithNumber {
 
 interface ActionWithString {
   type:
-    | FlagActivationTypes.ToggleTargetFlag
-    | FlagActivationTypes.ToggleAbilityTypeFlag;
+    | FlagActivationTypes.ToggleSkillTargetFlag
+    | FlagActivationTypes.TogglePlayerSkillTypeFlag;
   payload: string;
 }
 
@@ -46,7 +46,7 @@ function reducer(state: GlobalFlags, action: FlagActivationAction) {
     };
   }
 
-  if (action.type === "toggleTargetFlag") {
+  if (action.type === "toggleSkillTargetFlag") {
     return {
       ...state,
       target: {
@@ -56,7 +56,7 @@ function reducer(state: GlobalFlags, action: FlagActivationAction) {
     };
   }
 
-  if (action.type === "toggleAbilityTypeFlag") {
+  if (action.type === "togglePlayerSkillTypeFlag") {
     return {
       ...state,
       type: {

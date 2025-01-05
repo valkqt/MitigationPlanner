@@ -1,0 +1,47 @@
+.tickContainer {
+  display: flex;
+  width: min-content;
+  align-items: flex-end;
+}
+
+.greyText {
+  color: rgb(46, 46, 46);
+}
+
+.space {
+  box-sizing: border-box;
+  width: 8px;
+  height: 24px;
+  position: relative;
+}
+
+.testHorizontalDots {
+  display: flex;
+  position: relative;
+  height: 16px;
+  margin-top: 4px;
+}
+
+.bullet {
+  display: flex;
+  position: absolute;
+  top: -8px;
+}
+
+.bulletPoint {
+  color: red;
+  font-size: 24px;
+}
+
+.bulletPoint:hover {
+  transform: scale(1.5);
+}
+
+.bulletText {
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  padding: 0 8px;
+}

@@ -1,15 +1,21 @@
 import { useState } from "react";
 import css from "./Encounter.module.css";
-import { Ability, Job } from "../../types";
+import { PlayerSkill, Job } from "../../types";
 import Row from "./Row/Row";
-import TimeDisplay from "./TimeDisplay/TimeDisplay";
-import { AbilityType, databaseJobs, encounter, Target } from "../../globals";
+import TimeDisplay from "./TimeDisplay/BossTimeline";
+import {
+  PlayerSkillType,
+  databaseJobs,
+  encounters,
+  SkillTarget,
+} from "../../globals";
 import UserControls from "./UserControls/UserControls";
 import { useActivationFlagsContext } from "../../contexts/ActivationFlagsContext";
 import { FlagActivationTypes } from "../../contexts/ActivationFlagsContextProvider";
+import BossRow from "./Row/BossRow";
 
 export default function Encounter() {
-  const [abilities] = useState<Ability[]>(initializeAbilities);
+  const [abilities] = useState<PlayerSkill[]>(initializeAbilities);
 
   const [jobs] = useState<Job[]>(databaseJobs);
   const [, setFlags] = useActivationFlagsContext();
@@ -32,19 +38,22 @@ export default function Encounter() {
     });
   }
 
-  function handleAbilityFilter(filter: Target | AbilityType) {
-    if (filter in Target) {
-      setFlags({ type: FlagActivationTypes.ToggleTargetFlag, payload: filter });
+  function handleAbilityFilter(filter: SkillTarget | PlayerSkillType) {
+    if (filter in SkillTarget) {
+      setFlags({
+        type: FlagActivationTypes.ToggleSkillTargetFlag,
+        payload: filter,
+      });
     } else {
       setFlags({
-        type: FlagActivationTypes.ToggleAbilityTypeFlag,
+        type: FlagActivationTypes.TogglePlayerSkillTypeFlag,
         payload: filter,
       });
     }
   }
 
-  function initializeAbilities(): Ability[] {
-    let result: Ability[] = [];
+  function initializeAbilities(): PlayerSkill[] {
+    let result: PlayerSkill[] = [];
     databaseJobs.forEach((job) => {
       result = result.concat(job.skills);
     });
@@ -54,19 +63,28 @@ export default function Encounter() {
 
   return (
     <div className={css.TimelineContainer}>
+      <div className={css.EncounterInfo}>
+        <h1 className={css.EncounterHeader}>{encounters[0].name}</h1>
+      </div>
       <UserControls
         jobs={jobs}
         onJobToggle={handleJobSelection}
         abilities={abilities}
         onAbilityToggle={toggleAbility}
-        onTargetToggle={handleAbilityFilter}
+        onSkillTargetToggle={handleAbilityFilter}
         onLevelFilter={handleLevelFilter}
       />
-      <TimeDisplay encounter={encounter} />
+      <TimeDisplay encounter={encounters[0]} />
       <div>
+        <BossRow encounter={encounters[0]} />
         {abilities.map((ability) => {
           return (
-            <Row ability={ability} duration={encounter.duration} jobs={jobs} />
+            <Row
+              ability={ability}
+              duration={encounters[0].duration}
+              jobs={jobs}
+              key={ability.id}
+            />
           );
         })}
       </div>
