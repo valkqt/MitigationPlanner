@@ -10,7 +10,7 @@ interface DraggableItemProps {
   translate: Translate;
   axis?: Axis;
   ability: PlayerSkill;
-  onRightClick: (segmentId: string) => void;
+  onRightClick: () => void;
   isMoving: boolean;
 }
 

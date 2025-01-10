@@ -17,7 +17,7 @@ interface Props {
   translate?: Translate;
   ability: PlayerSkill;
   onMove: boolean;
-  onRightClick: (segmentId: string) => void;
+  onRightClick: () => void;
 }
 
 export const Draggable = forwardRef<HTMLButtonElement, Props>(
@@ -61,7 +61,7 @@ export const Draggable = forwardRef<HTMLButtonElement, Props>(
           {...(handle ? {} : listeners)}
           tabIndex={handle ? -1 : undefined}
           onContextMenu={(e) => {
-            onRightClick(ability);
+            onRightClick();
             e.preventDefault();
           }}
         >
