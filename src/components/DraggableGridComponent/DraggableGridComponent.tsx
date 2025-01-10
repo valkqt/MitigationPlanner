@@ -21,7 +21,7 @@ interface DndContextProps {
   style?: React.CSSProperties;
   label?: string;
   ability: PlayerSkill;
-  onRightClick: any;
+  onRightClick: (segmentId: string) => void;
   entity: Segment;
   nodes: Segment[];
   setNodes: (arr: Segment[]) => void;

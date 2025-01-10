@@ -5,7 +5,6 @@ import css from "./MechanicsDisplay.module.css";
 interface BulletProps {
   node: Timeline;
   width: number;
-  setMinWidth: any;
 }
 
 export default function Bullet({ node, width }: BulletProps) {

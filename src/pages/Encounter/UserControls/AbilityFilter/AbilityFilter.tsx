@@ -6,7 +6,7 @@ import classNames from "classnames";
 
 interface AbilityFilterProps {
   abilities: PlayerSkill[];
-  onAbilityToggle: any;
+  onAbilityToggle: (abilityId: number) => void;
   jobs: Job[];
 }
 

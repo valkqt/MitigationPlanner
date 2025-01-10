@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 interface SingleAbilityProps {
   ability: PlayerSkill;
-  onToggle: any;
+  onToggle: (abilityId: number) => void;
 }
 export default function SingleAbility({
   ability,

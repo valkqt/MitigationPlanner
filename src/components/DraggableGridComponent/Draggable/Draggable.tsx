@@ -17,7 +17,7 @@ interface Props {
   translate?: Translate;
   ability: PlayerSkill;
   onMove: boolean;
-  onRightClick: any;
+  onRightClick: (segmentId: string) => void;
 }
 
 export const Draggable = forwardRef<HTMLButtonElement, Props>(

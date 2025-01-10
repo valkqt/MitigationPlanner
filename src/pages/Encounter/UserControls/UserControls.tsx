@@ -3,14 +3,15 @@ import { PlayerSkill, Job } from "../../../types";
 import JobSelection from "./JobSelection/JobSelection";
 import Filters from "./Filters/Filters";
 import AbilityFilter from "./AbilityFilter/AbilityFilter";
+import { PlayerSkillType, SkillTarget } from "../../../globals";
 
 interface UserControlsProps {
   jobs: Job[];
-  onJobToggle: any;
+  onJobToggle: (jobId: number) => void;
   abilities: PlayerSkill[];
-  onAbilityToggle: any;
-  onSkillTargetToggle: any;
-  onLevelFilter: any;
+  onAbilityToggle: (abilityId: number) => void;
+  onSkillTargetToggle: (filter: SkillTarget | PlayerSkillType) => void;
+  onLevelFilter: (threshold: number) => void;
 }
 
 export default function UserControls({

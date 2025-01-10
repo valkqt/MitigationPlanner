@@ -6,8 +6,8 @@ import LevelFilter from "./LevelFilter/LevelFilter";
 
 interface FiltersProps {
   abilities: PlayerSkill[];
-  onSkillTargetToggle: any;
-  onLevelFilter: any;
+  onSkillTargetToggle: (filter: SkillTarget | PlayerSkillType) => void;
+  onLevelFilter: (threshold: number) => void;
 }
 
 export default function Filters({
