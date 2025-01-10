@@ -8,7 +8,7 @@ import { Axis } from "../../globals";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { useState } from "react";
 import DraggableItem from "./DraggableItem";
-import { Ability, Segment } from "../../types";
+import { PlayerSkill, Segment } from "../../types";
 import { Coordinates } from "@dnd-kit/core/dist/types";
 import { absoluteMousePosition } from "../../App";
 import { snapToGridModifier, defaultCoordinates } from "../../globals";
@@ -20,7 +20,7 @@ interface DndContextProps {
   modifiers?: Modifiers;
   style?: React.CSSProperties;
   label?: string;
-  ability: Ability;
+  ability: PlayerSkill;
   onRightClick: any;
   entity: Segment;
   nodes: Segment[];

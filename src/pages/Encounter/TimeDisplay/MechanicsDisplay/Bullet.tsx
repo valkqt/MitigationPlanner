@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Timeline } from "../../../../types";
 import css from "./MechanicsDisplay.module.css";
 
@@ -8,8 +8,8 @@ interface BulletProps {
   setMinWidth: any;
 }
 
-export default function Bullet({ node, width, setMinWidth }: BulletProps) {
-  const [isHover, setIsHover] = useState(false);
+export default function Bullet({ node, width }: BulletProps) {
+  const [, setIsHover] = useState(false);
   // useEffect(() => {
   //   if (node) {
   //     const element = document.getElementById(node.id + node.mechanic.name);

@@ -1,18 +1,4 @@
-import { useState } from "react";
-import { Encounter } from "../../../../types";
-import css from "./MechanicsDisplay.module.css";
-import classNames from "classnames";
-import Bullet from "./Bullet";
-import { gridSize } from "../../../../globals";
-import BossRow from "../../Row/BossRow";
-
-interface MechanicsDisplayProps {
-  encounter: Encounter;
-}
-
-export default function MechanicsDisplay({ encounter }: MechanicsDisplayProps) {
-  const [width, setWidth] = useState<number>(100);
-
+export default function MechanicsDisplay() {
   // function GenerateMechanicTitles(index: number) {
   //   const mechanic = encounter.nodes.find((node) => node.start === index);
 
@@ -27,11 +13,6 @@ export default function MechanicsDisplay({ encounter }: MechanicsDisplayProps) {
   //     );
   //   }
   // }
-
-  function calculateHeight(diagonal: number) {
-    const sin = Math.sin(38.5);
-    return diagonal * sin;
-  }
 
   return (
     // <div

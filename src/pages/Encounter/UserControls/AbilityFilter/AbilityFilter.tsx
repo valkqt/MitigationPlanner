@@ -11,7 +11,6 @@ interface AbilityFilterProps {
 }
 
 export default function AbilityFilter({
-  abilities,
   onAbilityToggle,
   jobs,
 }: AbilityFilterProps) {

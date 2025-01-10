@@ -14,15 +14,14 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "./SortableItem/SortableItem";
-import { Ability, Job } from "../../../types";
+import { PlayerSkill } from "../../../types";
 
 interface SortableRowProps {
-  abilities: Ability[];
+  abilities: PlayerSkill[];
 }
 
 export default function SortableTest({ abilities }: SortableRowProps) {
   const [items, setItems] = useState(initializeSortableIndex);
-  const [style, setStyle] = useState("");
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {

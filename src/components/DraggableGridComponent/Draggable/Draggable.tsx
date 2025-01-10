@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import classNames from "classnames";
 import type { DraggableSyntheticListeners, Translate } from "@dnd-kit/core";
 import styles from "./Draggable.module.css";
-import { Ability } from "../../../types";
+import { PlayerSkill } from "../../../types";
 import { Axis } from "../../../globals";
 import DraggableEntity from "../../../pages/Encounter/Row/DraggableEntity/DraggableEntity";
 
@@ -15,7 +15,7 @@ interface Props {
   listeners?: DraggableSyntheticListeners;
   style?: React.CSSProperties;
   translate?: Translate;
-  ability: Ability;
+  ability: PlayerSkill;
   onMove: boolean;
   onRightClick: any;
 }

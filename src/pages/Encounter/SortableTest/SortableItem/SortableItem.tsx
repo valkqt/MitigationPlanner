@@ -2,11 +2,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Row from "../../Row/Row";
 import { databaseJobs } from "../../../../globals";
-import { Ability } from "../../../../types";
+import { PlayerSkill } from "../../../../types";
 
 interface SortableItemProps {
   id: number;
-  ability: Ability;
+  ability: PlayerSkill;
   order: number;
 }
 
