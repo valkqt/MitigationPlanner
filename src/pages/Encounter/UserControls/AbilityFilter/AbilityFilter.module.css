@@ -1,18 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-height: 150px;
+  height: 212px;
   overflow: scroll;
   padding: 1rem;
   background-color: rgb(32, 32, 32);
   border-radius: 0.25rem;
+  width: 320px;
 }
 
 .jobFilter {
   padding-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  position: relative;
+  position: sticky;
 }
 
 .label {
